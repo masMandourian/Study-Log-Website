@@ -65,3 +65,9 @@ Then open http://localhost:8000. Add `http://localhost:8000/**` to Supabase Redi
 - **Share link unavailable:** confirm the SQL script created `get_public_dashboard(text)` and that the `share` query parameter is intact.
 
 Supabase and GitHub Pages free tiers have limits and are subject to their providers' terms.
+
+## Updating an existing STUDYLOG deployment
+
+For the editable study logs, free-text subjects, and customizable named countdown, upload the updated site files to the root of your existing GitHub repository (overwrite the existing files). Then run `migration-goal-countdown.sql` once in Supabase SQL Editor. This adds `goal_name` and `goal_date` to your profile and updates the read-only sharing RPC so viewers can see the countdown.
+
+The countdown is fully customizable: choose any title and any target date. The public sharing page displays it too. Study subjects are now free text rather than a fixed dropdown. Existing logs can be edited from the Recent sessions list.
