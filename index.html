@@ -74,7 +74,7 @@
               <div class="timer-display" id="timer-display">00:00:00</div>
               <div class="timer-progress"><span id="timer-progress"></span></div>
               <div class="timer-fields"><label>Subject<input id="timer-subject" maxlength="60" value="Math" placeholder="e.g. SAT Math" /></label><label>Session note<input id="timer-note" maxlength="180" placeholder="What are you working on?" /></label></div>
-              <div class="timer-actions"><button id="timer-start" class="btn btn-primary">▶ Start studying</button><button id="timer-stop" class="btn btn-danger hidden">■ Finish session</button><span class="timer-hint">Timer keeps running if you switch tabs.</span></div>
+              <div class="timer-actions"><button id="timer-start" class="btn btn-primary">▶ Start studying</button><button id="timer-pause" class="btn btn-outline hidden">Ⅱ Pause</button><button id="timer-stop" class="btn btn-danger hidden">■ Finish &amp; save</button><button id="timer-discard" class="btn btn-outline hidden">Discard</button><span class="timer-hint">Pause whenever you need. Choose Discard to finish without adding a log.</span></div>
             </article>
 
             <article class="panel goals-panel">
@@ -100,8 +100,8 @@
         </section>
 
         <section id="reports" class="content-section report-section">
-          <div class="section-heading"><div><h2>Weekly reports</h2><p class="muted">A clear look at how you used your time.</p></div><span class="report-period" id="report-period"></span></div>
-          <div class="report-grid"><article class="panel report-card"><span class="eyebrow">THIS WEEK</span><strong id="report-week-total">0h 0m</strong><small>Total focused time</small></article><article class="panel report-card"><span class="eyebrow">DAILY AVERAGE</span><strong id="report-average">0m</strong><small>Across the last 7 days</small></article><article class="panel report-card"><span class="eyebrow">GOAL PROGRESS</span><strong id="report-goal">0%</strong><small>Of your weekly target</small></article></div>
+          <div class="section-heading report-heading"><div><h2>Weekly reports</h2><p class="muted">Browse your study history week by week.</p></div><div class="week-navigation"><button class="btn btn-outline btn-small" id="report-prev" type="button">← Previous</button><span class="report-period" id="report-period"></span><button class="btn btn-outline btn-small" id="report-next" type="button" disabled>Next →</button></div></div>
+          <div class="report-grid"><article class="panel report-card"><span class="eyebrow" id="report-week-label">THIS WEEK</span><strong id="report-week-total">0h 0m</strong><small>Total focused time</small></article><article class="panel report-card"><span class="eyebrow">DAILY AVERAGE</span><strong id="report-average">0m</strong><small>Across the last 7 days</small></article><article class="panel report-card"><span class="eyebrow">GOAL PROGRESS</span><strong id="report-goal">0%</strong><small>Of your weekly target</small></article></div>
           <article class="panel"><div class="panel-heading"><div><span class="eyebrow">SUBJECT BREAKDOWN</span><h3>Where your time went</h3></div></div><div id="subject-breakdown" class="breakdown-list"><div class="empty-state">Your subject breakdown will appear here.</div></div></article>
         </section>
         <footer class="footer">STUDYLOG <span>·</span> Built for consistency, not perfection.</footer>
