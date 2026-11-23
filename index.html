@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#090b12" />
+  <meta name="description" content="A personal study accountability dashboard." />
+  <title>STUDYLOG — Study accountability</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <main id="app" class="app-shell">
+    <section id="loading" class="center-state"><div class="spinner"></div><p>Loading STUDYLOG…</p></section>
+
+    <section id="auth-screen" class="auth-layout hidden">
+      <div class="auth-art">
+        <div class="brand"><span class="brand-mark">S</span><span>STUDYLOG</span></div>
+        <div class="auth-message">
+          <p class="eyebrow">SHOW UP. LOG THE WORK.</p>
+          <h1>Progress is<br><span>proof.</span></h1>
+          <p class="muted">A quiet place to track the hours, build consistency, and stay accountable.</p>
+        </div>
+        <div class="auth-foot"><span class="pulse-dot"></span> Your next session starts with one decision.</div>
+      </div>
+      <div class="auth-panel">
+        <div class="auth-card">
+          <p class="eyebrow">YOUR PERSONAL STUDY SPACE</p>
+          <h2 id="auth-title">Welcome back.</h2>
+          <p id="auth-subtitle" class="muted">Sign in to continue your progress.</p>
+          <form id="auth-form" class="form-stack">
+            <label>Email address<input id="auth-email" type="email" autocomplete="email" placeholder="you@example.com" required /></label>
+            <label>Password<input id="auth-password" type="password" autocomplete="current-password" minlength="6" placeholder="At least 6 characters" required /></label>
+            <label id="name-field" class="hidden">Display name<input id="auth-name" type="text" maxlength="40" placeholder="How your name appears" /></label>
+            <button id="auth-submit" class="btn btn-primary" type="submit">Sign in <span>→</span></button>
+          </form>
+          <p class="auth-switch"><span id="auth-switch-text">New here?</span> <button id="auth-switch" class="text-button">Create an account</button></p>
+          <p class="tiny muted">Your data is stored securely in your connected Supabase project.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="owner-screen" class="hidden">
+      <aside class="sidebar">
+        <a class="brand" href="#top"><span class="brand-mark">S</span><span>STUDYLOG</span></a>
+        <div class="side-label">WORKSPACE</div>
+        <a class="nav-link active" href="#overview"><span>◫</span> Overview</a>
+        <a class="nav-link" href="#sessions"><span>◷</span> Study history</a>
+        <a class="nav-link" href="#reports"><span>▥</span> Weekly reports</a>
+        <div class="sidebar-bottom">
+          <div class="side-profile"><div class="avatar" id="avatar">S</div><div><strong id="side-name">Student</strong><small>Personal workspace</small></div></div>
+          <button id="sign-out" class="nav-link signout"><span>↪</span> Sign out</button>
+        </div>
+      </aside>
+
+      <div class="main-area" id="top">
+        <header class="topbar"><div><span class="eyebrow">YOUR ACCOUNTABILITY DASHBOARD</span><h1 id="greeting">Good evening.</h1></div><div class="top-actions"><span class="today-chip" id="today-label"></span><button class="btn btn-outline btn-small" id="share-open">↗ Share progress</button></div></header>
+
+        <section id="overview" class="content-section">
+          <div class="section-heading"><div><h2>Your progress</h2><p class="muted">Small, consistent sessions add up.</p></div><div class="live-tag"><span class="pulse-dot"></span> LIVE TRACKING</div></div>
+          <div class="stats-grid">
+            <article class="stat-card stat-featured"><div class="stat-top"><span>Total study time</span><span class="stat-icon">◷</span></div><strong id="total-hours">0h 0m</strong><small>All recorded sessions</small><div class="stat-accent"></div></article>
+            <article class="stat-card"><div class="stat-top"><span>This week</span><span class="stat-icon">▥</span></div><strong id="week-hours">0h 0m</strong><small id="week-sub">Your weekly progress</small></article>
+            <article class="stat-card"><div class="stat-top"><span>Today</span><span class="stat-icon">✳</span></div><strong id="today-hours">0m</strong><small id="today-sub">Daily goal: 0h</small></article>
+            <article class="stat-card"><div class="stat-top"><span>Sessions logged</span><span class="stat-icon">⌁</span></div><strong id="session-count">0</strong><small>Every session counts</small></article>
+          </div>
+
+          <div class="main-grid">
+            <article class="panel timer-panel">
+              <div class="panel-heading"><div><span class="eyebrow">FOCUS MODE</span><h3>Study timer</h3></div><span class="timer-status" id="timer-status">READY</span></div>
+              <div class="timer-display" id="timer-display">00:00:00</div>
+              <div class="timer-progress"><span id="timer-progress"></span></div>
+              <div class="timer-fields"><label>Subject<select id="timer-subject"><option>Math</option><option>English</option><option>Science</option><option>History</option><option>Computer Science</option><option>Other</option></select></label><label>Session note<input id="timer-note" maxlength="180" placeholder="What are you working on?" /></label></div>
+              <div class="timer-actions"><button id="timer-start" class="btn btn-primary">▶ Start studying</button><button id="timer-stop" class="btn btn-danger hidden">■ Finish session</button><span class="timer-hint">Timer keeps running if you switch tabs.</span></div>
+            </article>
+
+            <article class="panel goals-panel">
+              <div class="panel-heading"><div><span class="eyebrow">STAY ON TRACK</span><h3>Your study goals</h3></div><button class="icon-button" id="edit-goals" aria-label="Edit goals">✎</button></div>
+              <div class="goal-block"><div class="goal-line"><span>Daily target</span><strong id="daily-goal-label">2h</strong></div><div class="goal-track"><span id="daily-goal-fill"></span></div><small id="daily-goal-caption">0m of 2h completed today</small></div>
+              <div class="goal-block"><div class="goal-line"><span>Weekly target</span><strong id="weekly-goal-label">14h</strong></div><div class="goal-track purple"><span id="weekly-goal-fill"></span></div><small id="weekly-goal-caption">0h of 14h completed this week</small></div>
+              <div class="goal-note"><span>✦</span><p>Goals are yours to set. Focus on showing up, not being perfect.</p></div>
+            </article>
+          </div>
+
+          <article class="panel chart-panel">
+            <div class="panel-heading"><div><span class="eyebrow">THE LAST 7 DAYS</span><h3>Weekly consistency</h3></div><span class="chart-total" id="chart-total">0h total</span></div>
+            <div class="chart" id="weekly-chart" aria-label="Study time over the last seven days"></div>
+          </article>
+
+          <div class="section-heading recent-heading" id="sessions"><div><h2>Recent sessions</h2><p class="muted">Your work, recorded.</p></div><button class="btn btn-outline btn-small" id="add-session-open">+ Add a log</button></div>
+          <article class="panel table-panel"><div id="recent-list" class="session-list"><div class="empty-state">No study sessions yet. Start the timer or add your first log.</div></div></article>
+        </section>
+
+        <section id="reports" class="content-section report-section">
+          <div class="section-heading"><div><h2>Weekly reports</h2><p class="muted">A clear look at how you used your time.</p></div><span class="report-period" id="report-period"></span></div>
+          <div class="report-grid"><article class="panel report-card"><span class="eyebrow">THIS WEEK</span><strong id="report-week-total">0h 0m</strong><small>Total focused time</small></article><article class="panel report-card"><span class="eyebrow">DAILY AVERAGE</span><strong id="report-average">0m</strong><small>Across the last 7 days</small></article><article class="panel report-card"><span class="eyebrow">GOAL PROGRESS</span><strong id="report-goal">0%</strong><small>Of your weekly target</small></article></div>
+          <article class="panel"><div class="panel-heading"><div><span class="eyebrow">SUBJECT BREAKDOWN</span><h3>Where your time went</h3></div></div><div id="subject-breakdown" class="breakdown-list"><div class="empty-state">Your subject breakdown will appear here.</div></div></article>
+        </section>
+        <footer class="footer">STUDYLOG <span>·</span> Built for consistency, not perfection.</footer>
+      </div>
+    </section>
+
+    <section id="public-screen" class="public-screen hidden">
+      <header class="public-header"><a class="brand" href="#"><span class="brand-mark">S</span><span>STUDYLOG</span></a><span class="public-pill"><span class="pulse-dot"></span> PUBLIC PROGRESS</span></header>
+      <div class="public-content"><div class="public-intro"><p class="eyebrow">ACCOUNTABILITY, IN ACTION</p><h1><span id="public-name">Student</span>'s study journey.</h1><p class="muted">A transparent look at the work being put in. This page is read-only.</p></div>
+        <div class="stats-grid public-stats"><article class="stat-card stat-featured"><div class="stat-top"><span>Total study time</span><span class="stat-icon">◷</span></div><strong id="public-total">0h 0m</strong><small>All recorded sessions</small><div class="stat-accent"></div></article><article class="stat-card"><div class="stat-top"><span>This week</span><span class="stat-icon">▥</span></div><strong id="public-week">0h 0m</strong><small>Last 7 days</small></article><article class="stat-card"><div class="stat-top"><span>Today</span><span class="stat-icon">✳</span></div><strong id="public-today">0m</strong><small id="public-daily-goal">Daily goal</small></article><article class="stat-card"><div class="stat-top"><span>Sessions logged</span><span class="stat-icon">⌁</span></div><strong id="public-count">0</strong><small>Recorded study sessions</small></article></div>
+        <div class="main-grid public-main-grid"><article class="panel"><div class="panel-heading"><div><span class="eyebrow">THE LAST 7 DAYS</span><h3>Weekly consistency</h3></div></div><div class="chart" id="public-chart"></div></article><article class="panel"><div class="panel-heading"><div><span class="eyebrow">GOALS</span><h3>Current targets</h3></div></div><div class="goal-block"><div class="goal-line"><span>Daily target</span><strong id="public-daily-label">2h</strong></div><div class="goal-track"><span id="public-daily-fill"></span></div><small id="public-daily-caption"></small></div><div class="goal-block"><div class="goal-line"><span>Weekly target</span><strong id="public-weekly-label">14h</strong></div><div class="goal-track purple"><span id="public-weekly-fill"></span></div><small id="public-weekly-caption"></small></div></article></div>
+        <article class="panel public-history"><div class="panel-heading"><div><span class="eyebrow">RECENT ACTIVITY</span><h3>Study log</h3></div></div><div id="public-sessions" class="session-list"></div></article><p class="public-foot">Shared with you by <strong id="public-owner-footer">a student</strong> · STUDYLOG</p>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="goals-dialog" class="modal"><form method="dialog" id="goals-form"><div class="modal-head"><div><span class="eyebrow">MAKE IT YOURS</span><h2>Study goals</h2></div><button class="icon-button" value="cancel" aria-label="Close">×</button></div><label>Daily target (hours)<input id="daily-goal-input" type="number" min="0.5" max="16" step="0.5" value="2" required /></label><label>Weekly target (hours)<input id="weekly-goal-input" type="number" min="1" max="100" step="1" value="14" required /></label><button class="btn btn-primary" value="save" type="submit">Save goals</button></form></dialog>
+  <dialog id="log-dialog" class="modal"><form method="dialog" id="log-form"><div class="modal-head"><div><span class="eyebrow">ADD TO YOUR RECORD</span><h2>Log a study session</h2></div><button class="icon-button" value="cancel" aria-label="Close">×</button></div><label>Subject<select id="log-subject"><option>Math</option><option>English</option><option>Science</option><option>History</option><option>Computer Science</option><option>Other</option></select></label><div class="two-fields"><label>Date<input id="log-date" type="date" required /></label><label>Duration (minutes)<input id="log-duration" type="number" min="1" max="1440" placeholder="60" required /></label></div><label>What did you accomplish?<textarea id="log-note" rows="3" maxlength="500" placeholder="Topics covered, questions solved, or what you learned…"></textarea></label><label>Questions completed <input id="log-questions" type="number" min="0" max="10000" value="0" /></label><button class="btn btn-primary" type="submit" value="save">Save study log</button></form></dialog>
+  <dialog id="share-dialog" class="modal"><div class="modal-head"><div><span class="eyebrow">LET THEM SEE THE WORK</span><h2>Share your progress</h2></div><button class="icon-button" id="share-close" aria-label="Close">×</button></div><p class="muted">Anyone with this link can view your study totals, goals, and logs. They cannot edit anything.</p><div class="share-url"><input id="share-url" readonly /><button class="btn btn-primary btn-small" id="copy-share">Copy</button></div><p class="tiny muted">Treat this link like a password: anyone who has it can view your public progress.</p></dialog>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
