@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=5" />
 </head>
 <body>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -104,7 +104,7 @@
           <div class="report-grid"><article class="panel report-card"><span class="eyebrow" id="report-week-label">THIS WEEK</span><strong id="report-week-total">0h 0m</strong><small>Total focused time</small></article><article class="panel report-card"><span class="eyebrow">DAILY AVERAGE</span><strong id="report-average">0m</strong><small>Across the last 7 days</small></article><article class="panel report-card"><span class="eyebrow">GOAL PROGRESS</span><strong id="report-goal">0%</strong><small>Of your weekly target</small></article></div>
           <article class="panel"><div class="panel-heading"><div><span class="eyebrow">SUBJECT BREAKDOWN</span><h3>Where your time went</h3></div></div><div id="subject-breakdown" class="breakdown-list"><div class="empty-state">Your subject breakdown will appear here.</div></div></article>
         </section>
-        <footer class="footer">STUDYLOG <span>·</span> Built for consistency, not perfection.</footer>
+        <footer class="footer">STUDYLOG <span>·</span> Built for consistency, not perfection. <span>·</span> VERSION 5</footer>
       </div>
     </section>
 
@@ -124,6 +124,6 @@
   <dialog id="deadline-dialog" class="modal"><form method="dialog" id="deadline-form"><div class="modal-head"><div><span class="eyebrow">YOUR NEXT MILESTONE</span><h2>Set a countdown</h2></div><button class="icon-button" value="cancel" aria-label="Close">×</button></div><label>What are you working towards?<input id="deadline-name-input" maxlength="60" placeholder="e.g. December SAT trial" required /></label><label>Goal date<input id="deadline-date-input" type="date" required /></label><button class="btn btn-primary" type="submit" value="save">Save countdown</button></form></dialog>
   <dialog id="share-dialog" class="modal"><div class="modal-head"><div><span class="eyebrow">LET THEM SEE THE WORK</span><h2>Share your progress</h2></div><button class="icon-button" id="share-close" aria-label="Close">×</button></div><p class="muted">Anyone with this link can view your study totals, goals, and logs. They cannot edit anything.</p><div class="share-url"><input id="share-url" readonly /><button class="btn btn-primary btn-small" id="copy-share">Copy</button></div><p class="tiny muted">Treat this link like a password: anyone who has it can view your public progress.</p></dialog>
 
-  <script type="module" src="app.js"></script>
+  <script type="module" src="app.js?v=5"></script>
 </body>
 </html>
